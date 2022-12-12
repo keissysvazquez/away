@@ -28,7 +28,9 @@ Interact with Google Map		- User should be able to drag map
 - User should be able to zoom in and out
 
 
-##Getting Started
-*	-Clone repository
-*	-run `npm install`
-*	-run `npx playwright test --debug` OR `npx playwright test`
+## Getting Started
+
+
+*	Clone repository
+*	run `npm install`
+*	run `npx playwright test --debug` OR `npx playwright test`
