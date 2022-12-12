@@ -35,9 +35,8 @@ exports.AwayStoresPage = class AwayStoresPage {
                 .getByRole('link', { name: 'See store' })
                 .filter({ hasText: 'NYC: Noho' })
         this.animationClass = '.cta_light__0LlGt'
-        this.animationEnter = page.locator('.cta_lightEnter__lSILv').first()
+       // this.animationEnter = page.locator('.cta_animationEnter__6RXYX').first()
         this.animationExit = page.locator('.cta_lightExit__BiSes').first()
-        //this.animationArrow = page.locator('.cta_lightEnter__lSILv .cta_animationEnter__6RXYX')
     }
 
     async goToStoresPage() {
@@ -51,13 +50,14 @@ exports.AwayStoresPage = class AwayStoresPage {
     async verifyStores() {
         await expect(this.storeObjects).toContainText(this.storesList)
     }
-    async scrollThroughSite() {
-        await this.page.mouse.wheel(0, 9000)
-    }
     async hoverAnimationArrow() {
-        await expect(this.animationEnter).toBeVisible()
+       // await expect(this.page.locator('.cta_animationEnter__6RXYX')).toBeVisible()
         await this.page.hover(this.animationClass)
         await expect(this.animationExit).toBeVisible()
+    }
+
+    async scrollThroughSite() {
+        await this.page.mouse.wheel(0, 9000)
     }
 
     async selectStoreLocation(storeName, urlName) {

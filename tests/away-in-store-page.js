@@ -7,6 +7,25 @@ exports.AwayinStorePage = class AwayinStorePage {
      */
     constructor(page) {
         this.page = page;
+        this.descriptionName = page.locator('[itemprop="name"]')
+        this.itempropDescription = page.locator('[itemprop="description"]')
+        this.telNumber = page.locator('[href="tel:6466493191"]')
+        this.emailAddress = page.locator('[href="mailto:bond@awaytravel.com"]')
+        this.additionalInformationHeader = page.locator('h2', { hasText: 'Additional store information' })
+        this.sanitizingStation = page.locator('div.component-messages:has-text("Sanitizing stations")')
+        this.paymentOptions = page.locator('div.component-messages:has-text("Payment Options")')
+        this.curbsidePickup = page.locator('div.component-messages:has-text("Curbside pickup")')
+        this.swiperGallery = page.locator('div.swiper-slide-active')
+        this.swiperGalleryImg = page.locator('div.swiper-slide-active:has(img)')
+        this.previousSlide = page.locator('[aria-label="previous slide"]')
+        this.nextSlide = page.locator('[aria-label="next slide"]')
+        this.mapPin = page.locator('div.gm-style>>[aria-label="Away in New York City: NoHo"]')
+        this.gmap = page.locator('div.gm-style')
+        this.zoomOutClick = page.locator('[aria-label="Zoom out"]').click()
+        this.zoomInClick = page.locator('[aria-label="Zoom in"]').click()
+        this.itempropAddress = page.locator('[itemprop="address"]')
+        this.nohoAddress = '10 Bond St.New York,NY 10012'
+        this.hoursOperation = page.locator('div.store_location_info_label__THM1_:has-text("Hours")')
     }
 
     async goToStorePage(storeUrl) {
@@ -29,49 +48,48 @@ exports.AwayinStorePage = class AwayinStorePage {
         await expect(this.page).toHaveURL(this.nycStoreURL);
     }
     async validateTitleAwayIn(cityName) {
-        await expect(this.page.locator('[itemprop="name"]')).toBeVisible()
-        await expect(this.page.locator('[itemprop="name"]')).toContainText(`Away in ${cityName}`)
+        await expect(this.descriptionName).toBeVisible()
+        await expect(this.descriptionName).toContainText(`Away in ${cityName}`)
     }
     async validateDescription() {
-        await expect(this.page.locator('[itemprop="description"]')).toBeVisible()
-        await expect(this.page.locator('[href="tel:6466493191"]')).toBeVisible()
-        await expect(this.page.locator('[href="mailto:bond@awaytravel.com"]')).toBeVisible()
+        await expect(this.itempropDescription).toBeVisible()
+        await expect(this.telNumber).toBeVisible()
+        await expect(this.emailAddress).toBeVisible()
     }
 
     async validateAdditionalStoreInformation() {
         //TODO: Validate icons. 
-        await expect(this.page.locator('h2', { hasText: 'Additional store information' })).toBeVisible()
-        await expect(this.page.locator('div.component-messages:has-text("Sanitizing stations")')).toBeVisible()
-        await expect(this.page.locator('div.component-messages:has-text("Payment Options")')).toBeVisible()
-        await expect(this.page.locator('div.component-messages:has-text("Curbside pickup")')).toBeVisible()
+        await expect(this.additionalInformationHeader).toBeVisible()
+        await expect(this.sanitizingStation).toBeVisible()
+        await expect(this.paymentOptions).toBeVisible()
+        await expect(this.curbsidePickup).toBeVisible()
     }
 
     async imageGallery() {
-        await this.page.locator('div.swiper-slide-active').scrollIntoViewIfNeeded()
-        await expect(this.page.locator('div.swiper-slide-active')).toBeVisible()
-        await expect(this.page.locator('div.swiper-slide-active:has(img)')).toBeVisible()
+        await this.swiperGallery.scrollIntoViewIfNeeded()
+        await expect(this.swiperGallery).toBeVisible()
+        await expect(this.swiperGalleryImg).toBeVisible()
     }
     async gallerySlide() {
-        await expect(this.page.locator('[aria-label="previous slide"]')).toBeVisible()
-        await expect(this.page.locator('[aria-label="next slide"]')).toBeVisible()
-        await this.page.locator('[aria-label="previous slide"]').click()
-        await expect(this.page.locator('div.swiper-slide-active:has(img)')).toBeVisible()
-        await this.page.locator('[aria-label="next slide"]').click()
-        await expect(this.page.locator('div.swiper-slide-active:has(img)')).toBeVisible()
+        await expect(this.previousSlide).toBeVisible()
+        await expect(this.nextSlide).toBeVisible()
+        await this.previousSlide.click()
+        await expect(this.swiperGalleryImg).toBeVisible()
+        await this.nextSlide.click()
+        await expect(this.swiperGalleryImg).toBeVisible()
     }
 
     async mapSection() {
-        await this.page.locator('div.gm-style').scrollIntoViewIfNeeded()
-        await expect(this.page.locator('div.gm-style>>[aria-label="Away in New York City: NoHo"]')).toBeVisible()
+        await this.gmap.scrollIntoViewIfNeeded()
+        await expect(this.mapPin).toBeVisible()
+        await expect(this.itempropAddress).toContainText(this.nohoAddress)
+        await expect(this.hoursOperation).toBeVisible()
+        await this.zoomOutClick
+        await this.zoomInClick
         //TODO: actual drag and drop functionality. This part isnt working. 
         await this.page.dragAndDrop('[aria-label="Map"]', '[aria-label="Map"]', {
             sourcePosition: { x: 0, y: 7 },
             targetPosition: { x: 80, y: 500 },
         });
-        await expect(this.page.locator('[itemprop="address"]')).toContainText('10 Bond St.New York,NY 10012')
-        await expect(this.page.locator('div.store_location_info_label__THM1_:has-text("Hours")')).toBeVisible()
-        await this.page.locator('[aria-label="Zoom out"]').click()
-        await this.page.locator('[aria-label="Zoom in"]').click()
-        
     }
 }
