@@ -45,7 +45,7 @@ test('Validate Gallery Details', async ({ page }) => {
     await awayInStorePage.gallerySlide()
 });
 
-test.only('Validate Map section', async ({ page }) => {
+test('Validate Map section', async ({ page }) => {
     const awayInStorePage = new AwayinStorePage(page);
     await awayInStorePage.goToStorePage(/newyork/)
     await awayInStorePage.mapInteraction()

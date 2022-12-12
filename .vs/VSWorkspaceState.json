@@ -1,8 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\tests"
+    ""
   ],
-  "SelectedNode": "\\tests\\away-stores-page.js",
+  "SelectedNode": "\\pageObjects",
   "PreviewInSolutionExplorer": false
 }

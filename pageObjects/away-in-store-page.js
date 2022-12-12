@@ -85,12 +85,12 @@ exports.AwayinStorePage = class AwayinStorePage {
         await expect(this.mapPin).toBeVisible()
         await expect(this.itempropAddress).toContainText(this.nohoAddress)
         await expect(this.hoursOperation).toBeVisible()
-        await this.zoomOutClick.click()
-        await this.zoomInClick.click()
     }
 
     async mapInteraction() {
         await this.gmap.scrollIntoViewIfNeeded()
+        await this.zoomOutClick.click()
+        await this.zoomInClick.click()
         await this.page.frames()[1].$('.gm-style-moc');
         await this.page.mouse.move(600, 300);
         await this.page.mouse.down();
