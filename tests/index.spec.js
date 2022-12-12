@@ -1,8 +1,8 @@
 // example.spec.js
 const { test, expect } = require('@playwright/test');
-const { AwayHomePage } = require('./away-home-page');
-const { AwayStoresPage } = require('./away-stores-page');
-const { AwayinStorePage } = require('./away-in-store-page');
+const { AwayHomePage } = require('../pageObjects/away-home-page');
+const { AwayStoresPage } = require('../pageObjects/away-stores-page');
+const { AwayinStorePage } = require('../pageObjects/away-in-store-page');
 
 
 test('Navigating to home page', async ({ page }) => {
