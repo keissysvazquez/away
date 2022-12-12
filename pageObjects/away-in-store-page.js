@@ -91,7 +91,6 @@ exports.AwayinStorePage = class AwayinStorePage {
 
     async mapInteraction() {
         await this.gmap.scrollIntoViewIfNeeded()
-
         await this.page.frames()[1].$('.gm-style-moc');
         await this.page.mouse.move(30, 30);
         await this.page.mouse.down();
