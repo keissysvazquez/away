@@ -21,8 +21,8 @@ exports.AwayinStorePage = class AwayinStorePage {
         this.nextSlide = page.locator('[aria-label="next slide"]')
         this.mapPin = page.locator('div.gm-style>>[aria-label="Away in New York City: NoHo"]')
         this.gmap = page.locator('div.gm-style')
-        this.zoomOutClick = page.locator('[aria-label="Zoom out"]').click()
-        this.zoomInClick = page.locator('[aria-label="Zoom in"]').click()
+        this.zoomOutClick = page.locator('[aria-label="Zoom out"]')
+        this.zoomInClick = page.locator('[aria-label="Zoom in"]')
         this.itempropAddress = page.locator('[itemprop="address"]')
         this.nohoAddress = '10 Bond St.New York,NY 10012'
         this.hoursOperation = page.locator('div.store_location_info_label__THM1_:has-text("Hours")')
@@ -70,6 +70,7 @@ exports.AwayinStorePage = class AwayinStorePage {
         await expect(this.swiperGallery).toBeVisible()
         await expect(this.swiperGalleryImg).toBeVisible()
     }
+
     async gallerySlide() {
         await expect(this.previousSlide).toBeVisible()
         await expect(this.nextSlide).toBeVisible()
@@ -84,12 +85,25 @@ exports.AwayinStorePage = class AwayinStorePage {
         await expect(this.mapPin).toBeVisible()
         await expect(this.itempropAddress).toContainText(this.nohoAddress)
         await expect(this.hoursOperation).toBeVisible()
-        await this.zoomOutClick
-        await this.zoomInClick
-        //TODO: actual drag and drop functionality. This part isnt working. 
-        await this.page.dragAndDrop('[aria-label="Map"]', '[aria-label="Map"]', {
-            sourcePosition: { x: 0, y: 7 },
-            targetPosition: { x: 80, y: 500 },
-        });
+        await this.zoomOutClick.click()
+        await this.zoomInClick.click()
+    }
+
+    async mapInteraction() {
+        await this.gmap.scrollIntoViewIfNeeded()
+
+        await this.page.frames()[1].$('.gm-style-moc');
+        await this.page.mouse.move(30, 30);
+        await this.page.mouse.down();
+        await this.page.mouse.move(60, 60);
+        await this.page.mouse.up();
+
+
+        //await this.page.dragAndDrop('[aria-label="Map"]', '.gm-style-moc', {
+        //    force: true,
+        //    sourcePosition: { x: 20, y: 50 },
+        //    targetPosition: { x: 500, y: 150 },
+        //});
+
     }
 }
