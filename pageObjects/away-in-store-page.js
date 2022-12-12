@@ -92,17 +92,11 @@ exports.AwayinStorePage = class AwayinStorePage {
     async mapInteraction() {
         await this.gmap.scrollIntoViewIfNeeded()
         await this.page.frames()[1].$('.gm-style-moc');
-        await this.page.mouse.move(30, 30);
+        await this.page.mouse.move(600, 300);
         await this.page.mouse.down();
-        await this.page.mouse.move(60, 60);
+        await this.page.mouse.move(1200, 450, { steps: 5 });
         await this.page.mouse.up();
 
-
-        //await this.page.dragAndDrop('[aria-label="Map"]', '.gm-style-moc', {
-        //    force: true,
-        //    sourcePosition: { x: 20, y: 50 },
-        //    targetPosition: { x: 500, y: 150 },
-        //});
 
     }
 }
