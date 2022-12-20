@@ -51,3 +51,9 @@ test('Validate Map section', async ({ page }) => {
     await awayInStorePage.mapInteraction()
     await awayInStorePage.mapSection()
 });
+
+test.only('Navigating to home page and validate help link is visible', async ({ page }) => {
+    const awayHomePage = new AwayHomePage(page);
+    await awayHomePage.goto();
+    await awayHomePage.validateHelpisAvailable();
+});

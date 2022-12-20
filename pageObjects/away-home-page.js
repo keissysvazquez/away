@@ -10,6 +10,8 @@ exports.AwayHomePage = class AwayHomePage {
         this.homeTitle = '/Away | Built for modern travel/';
         this.storesURL = /.*stores/
         this.stores = page.getByRole('link', { name: 'Stores' });
+        this.help = page.getByRole('link', { name: 'Help' });
+
     }
 
     async goto() {
@@ -23,6 +25,7 @@ exports.AwayHomePage = class AwayHomePage {
         await this.stores.first().click();
         await expect(this.page).toHaveURL(this.storesURL);
     }
-
- 
+    async validateHelpisAvailable(){ 
+        await expect(this.help.first()).toBeVisible()
+    }
 }

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\pageObjects",
+    "\\tests"
   ],
-  "SelectedNode": "\\pageObjects",
+  "SelectedNode": "\\tests\\index.spec.js",
   "PreviewInSolutionExplorer": false
 }
